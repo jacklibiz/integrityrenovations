@@ -1,0 +1,818 @@
+<!DOCTYPE html><html lang="en"><head><meta name="x-poe-datastore-behavior" content="local_only"><meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://code.jquery.com https://unpkg.com https://d3js.org https://threejs.org https://cdn.plot.ly https://stackpath.bootstrapcdn.com https://maps.googleapis.com https://cdn.tailwindcss.com https://ajax.googleapis.com https://kit.fontawesome.com https://cdn.datatables.net https://maxcdn.bootstrapcdn.com https://code.highcharts.com https://tako-static-assets-production.s3.amazonaws.com https://www.youtube.com https://fonts.googleapis.com https://fonts.gstatic.com https://pfst.cf2.poecdn.net https://puc.poecdn.net https://i.imgur.com https://wikimedia.org https://*.icons8.com https://*.giphy.com https://picsum.photos https://images.unsplash.com; frame-src 'self' https://www.youtube.com https://trytako.com; child-src 'self'; manifest-src 'self'; worker-src 'self'; upgrade-insecure-requests; block-all-mixed-content;">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrity Renovations &amp; Designs | Augusta's Trusted Remodeler</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&amp;family=Playfair+Display:wght@600;700;800&amp;display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: { DEFAULT: '#1B263B', light: '#243352', deep: '#0D1B2A' },
+                        accent: { DEFAULT: '#C9A96E', light: '#D4BA88', warm: '#B8944F', glow: '#E8D5A8' },
+                        neutral: { DEFAULT: '#6B7280', light: '#9CA3AF', soft: '#F8F9FA' }
+                    },
+                    fontFamily: {
+                        outfit: ['Outfit', 'sans-serif'],
+                        display: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        * { font-family: 'Outfit', sans-serif; }
+        html { scroll-behavior: smooth; }
+
+        /* ---- Animations ---- */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+        .fade-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .fade-left.visible { opacity: 1; transform: translateX(0); }
+
+        .fade-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .fade-right.visible { opacity: 1; transform: translateX(0); }
+
+        .stagger-children > *:nth-child(1) { transition-delay: 0.05s; }
+        .stagger-children > *:nth-child(2) { transition-delay: 0.12s; }
+        .stagger-children > *:nth-child(3) { transition-delay: 0.19s; }
+        .stagger-children > *:nth-child(4) { transition-delay: 0.26s; }
+        .stagger-children > *:nth-child(5) { transition-delay: 0.33s; }
+        .stagger-children > *:nth-child(6) { transition-delay: 0.40s; }
+
+        /* ---- Phone Button Pulse ---- */
+        @keyframes phonePulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(201, 169, 110, 0.6); }
+            50% { box-shadow: 0 0 0 12px rgba(201, 169, 110, 0); }
+        }
+        @keyframes phoneRing {
+            0% { transform: rotate(0deg); }
+            10% { transform: rotate(14deg); }
+            20% { transform: rotate(-10deg); }
+            30% { transform: rotate(8deg); }
+            40% { transform: rotate(-6deg); }
+            50% { transform: rotate(0deg); }
+            100% { transform: rotate(0deg); }
+        }
+        .phone-cta {
+            animation: phonePulse 2.5s ease-in-out infinite;
+            background: linear-gradient(135deg, #C9A96E 0%, #E8D5A8 50%, #C9A96E 100%);
+            background-size: 200% 200%;
+            transition: all 0.3s ease;
+        }
+        .phone-cta:hover {
+            animation: none;
+            box-shadow: 0 8px 30px rgba(201, 169, 110, 0.5);
+            transform: translateY(-2px) scale(1.03);
+            background-position: 100% 100%;
+        }
+        .phone-cta .phone-icon {
+            display: inline-block;
+            animation: phoneRing 3s ease-in-out infinite;
+        }
+
+        /* ---- Hero shimmer CTA ---- */
+        @keyframes heroShimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        .hero-cta {
+            background: linear-gradient(110deg, #C9A96E 0%, #D4BA88 30%, #F0E4C8 50%, #D4BA88 70%, #C9A96E 100%);
+            background-size: 200% 100%;
+            animation: heroShimmer 4s ease-in-out infinite, phonePulse 2.5s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+        .hero-cta:hover {
+            animation: heroShimmer 4s ease-in-out infinite;
+            box-shadow: 0 12px 40px rgba(201, 169, 110, 0.6);
+            transform: translateY(-3px) scale(1.04);
+        }
+        .hero-cta .phone-icon {
+            display: inline-block;
+            animation: phoneRing 3s ease-in-out infinite;
+        }
+
+        /* ---- Mobile sticky CTA ---- */
+        .mobile-phone-bar {
+            background: linear-gradient(135deg, #C9A96E 0%, #B8944F 100%);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+        }
+
+        /* ---- Process line ---- */
+        .process-line::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #C9A96E 15%, #C9A96E 85%, transparent);
+            z-index: 0;
+        }
+
+        /* ---- Portfolio hover ---- */
+        .portfolio-card img { transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1); }
+        .portfolio-card:hover img { transform: scale(1.08); }
+
+        /* ---- Service card hover lift ---- */
+        .service-card {
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(27, 38, 59, 0.12);
+        }
+
+        /* ---- Parallax hero ---- */
+        .hero-bg {
+            will-change: transform;
+            transition: transform 0.1s linear;
+        }
+
+        /* ---- Section divider wave ---- */
+        .wave-divider {
+            position: relative;
+        }
+        .wave-divider::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: white;
+            clip-path: ellipse(55% 100% at 50% 100%);
+        }
+
+        /* ---- Stat counter ---- */
+        @keyframes countUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ---- Nav scroll effect ---- */
+        nav.scrolled {
+            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+            backdrop-filter: blur(12px);
+        }
+
+        /* ---- Dark mode ---- */
+        html.dark body { background: #0D1B2A; color: #E0E1DD; }
+        html.dark .bg-white { background: #1B263B !important; }
+        html.dark .bg-neutral-soft { background: #0D1B2A !important; }
+        html.dark .text-slate-800, html.dark .text-gray-800 { color: #E0E1DD !important; }
+        html.dark .text-neutral, html.dark .text-gray-600, html.dark .text-slate-600 { color: #A0AEC0 !important; }
+        html.dark .text-navy { color: #7EA8D4 !important; }
+        html.dark .border-gray-100, html.dark .border-slate-100 { border-color: #2D3748 !important; }
+        html.dark nav { background: rgba(27, 38, 59, 0.95) !important; border-bottom: 1px solid #2D3748; }
+        html.dark #mobile-menu { background: #1B263B !important; }
+        html.dark .nav-logo { filter: invert(1); }
+        html.dark .service-card { background: #1B263B !important; border-color: #2D3748 !important; }
+        html.dark .mobile-phone-bar { box-shadow: 0 -4px 20px rgba(0,0,0,0.4); }
+        html.dark .wave-divider::after { background: #0D1B2A; }
+
+        /* ---- Smooth image reveal ---- */
+        .img-reveal {
+            overflow: hidden;
+        }
+        .img-reveal img {
+            transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease;
+        }
+        .img-reveal:hover img {
+            transform: scale(1.06);
+        }
+    </style>
+</head>
+<body class="font-outfit text-slate-800 bg-white min-h-screen">
+
+    <!-- ====== CREDIBILITY TOP BAR ====== -->
+    <div class="bg-navy-deep text-gray-300 text-sm py-2.5 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center z-50 relative">
+        <div class="flex items-center space-x-5 mb-1.5 md:mb-0">
+            <span class="flex items-center font-semibold text-yellow-400 text-[15px]">
+                <svg class="w-4 h-4 mr-1.5 text-yellow-400 fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                5 Star Rated on Google
+            </span>
+            <span class="hidden md:inline text-gray-600">|</span>
+            <a href="mailto:jasonlucas724@gmail.com" class="hidden md:flex items-center hover:text-white transition text-[14px]">
+                <i data-lucide="mail" class="w-3.5 h-3.5 mr-1.5"></i> jasonlucas724@gmail.com
+            </a>
+        </div>
+        <div class="flex items-center space-x-5">
+            <span class="flex items-center text-gray-400 text-[14px]">
+                <i data-lucide="map-pin" class="w-3.5 h-3.5 mr-1.5"></i> Serving Augusta &amp; Surrounding Areas
+            </span>
+            <a href="https://www.facebook.com/people/Integrity-Renovations-and-Designs/61586637885378/" target="_blank" rel="noreferrer" class="flex items-center hover:text-white transition text-[14px]">
+                <i data-lucide="facebook" class="w-3.5 h-3.5 mr-1.5"></i> <span class="hidden sm:inline">Follow Us</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- ====== NAVIGATION ====== -->
+    <nav class="bg-white/95 backdrop-blur-md sticky top-0 z-40 border-b border-gray-100 transition-all duration-300" id="main-nav">
+        <div class="max-w-7xl mx-auto px-4 md:px-8 py-3 flex justify-between items-center">
+            <a href="#home" class="flex items-center">
+                <img src="https://pfst.cf2.poecdn.net/base/image/bdde33109217eead3f20e58a927401ee89d48116c5796135c3133c3711a4a88d?w=2048&amp;h=900" alt="Integrity Renovations &amp; Designs" class="nav-logo h-12 md:h-14 w-auto">
+            </a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex items-center space-x-7">
+                <a href="#home" class="font-semibold text-navy hover:text-accent transition text-[16px]">Home</a>
+                <a href="#services" class="font-semibold text-navy hover:text-accent transition text-[16px]">Services</a>
+                <a href="#portfolio" class="font-semibold text-navy hover:text-accent transition text-[16px]">Our Work</a>
+                <a href="#about" class="font-semibold text-navy hover:text-accent transition text-[16px]">About</a>
+                <a href="#contact" class="font-semibold text-navy hover:text-accent transition text-[16px]">Contact</a>
+                <a href="tel:+17066317935" class="phone-cta text-navy-deep px-6 py-3 rounded-full font-bold flex items-center text-[16px] tracking-wide">
+                    <span class="phone-icon mr-2"><i data-lucide="phone" class="w-5 h-5"></i></span> (706) 631-7935
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <div class="flex items-center md:hidden space-x-3">
+                <a href="tel:+17066317935" class="phone-cta text-navy-deep px-4 py-2.5 rounded-full font-bold flex items-center text-[15px]">
+                    <span class="phone-icon mr-1.5"><i data-lucide="phone" class="w-4 h-4"></i></span> Call Now
+                </a>
+                <button id="mobile-menu-btn" class="text-navy focus:outline-none" aria-label="Toggle menu">
+                    <i data-lucide="menu" id="menu-icon" class="w-7 h-7"></i>
+                    <i data-lucide="x" id="close-icon" class="w-7 h-7 hidden"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Nav -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-5 pt-3 pb-6 space-y-1 shadow-xl">
+            <a href="#home" class="block font-semibold py-3 text-navy mobile-link text-[17px] border-b border-gray-50">Home</a>
+            <a href="#services" class="block font-semibold py-3 text-navy mobile-link text-[17px] border-b border-gray-50">Services</a>
+            <a href="#portfolio" class="block font-semibold py-3 text-navy mobile-link text-[17px] border-b border-gray-50">Our Work</a>
+            <a href="#about" class="block font-semibold py-3 text-navy mobile-link text-[17px] border-b border-gray-50">About</a>
+            <a href="#contact" class="block font-semibold py-3 text-navy mobile-link text-[17px] border-b border-gray-50">Contact</a>
+            <a href="tel:+17066317935" class="hero-cta text-navy-deep px-6 py-4 rounded-xl font-bold text-center block w-full mt-4 mobile-link flex justify-center items-center text-[18px]">
+                <span class="phone-icon mr-2"><i data-lucide="phone" class="w-5 h-5"></i></span> (706) 631-7935
+            </a>
+        </div>
+    </nav>
+
+    <!-- ====== HERO SECTION ====== -->
+    <section id="home" class="relative h-[600px] md:h-[680px] flex items-center justify-center overflow-hidden wave-divider">
+        <div class="absolute inset-0 z-0 hero-bg">
+            <img src="https://pfst.cf2.poecdn.net/base/image/42a51e4c55454578b3a97fd9c5792f7e134a5880316537943df7a418e0dc56e7?w=765&amp;h=1024" alt="" class="w-full h-full object-cover" style="object-position: center 30%;">
+            <div class="absolute inset-0 bg-gradient-to-b from-navy-deep/50 via-navy/40 to-navy-deep/70"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-5 max-w-4xl mx-auto">
+            <img src="https://pfst.cf2.poecdn.net/base/image/01b762244f3a978a7c03cc4e0fbef571d09b4bab5119bd53ad70d95fcbc3b9a4?w=1320&amp;h=1298" alt="IR Logo" class="w-18 h-18 md:w-22 md:h-22 mx-auto mb-6 rounded-xl shadow-2xl" style="width:72px;height:72px;">
+            <p class="uppercase tracking-[0.35em] text-accent-light text-xs md:text-sm font-semibold mb-4">Augusta, Georgia</p>
+            <h1 class="font-display text-3xl md:text-5xl font-bold text-white mb-5 leading-tight tracking-wide">
+                The Augusta Standard for<br>Honest, Premium Renovations
+            </h1>
+            <p class="text-base md:text-lg text-white/70 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
+                Kitchen remodels · Bathroom renovations · Tile · Painting · Drywall · Flooring
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-5">
+                <a href="tel:+17066317935" class="hero-cta text-navy-deep px-10 py-4 rounded-full font-bold text-lg hover:opacity-90 transition w-full sm:w-auto text-center flex justify-center items-center shadow-2xl">
+                    <span class="phone-icon mr-2"><i data-lucide="phone" class="w-5 h-5"></i></span> Call for a Free Quote
+                </a>
+                <a href="#services" class="bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-white/20 hover:border-white/50 transition w-full sm:w-auto text-center">
+                    Explore Services
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== WHY CHOOSE US — 3 USPs ====== -->
+    <section class="py-20 bg-white relative z-10">
+        <div class="max-w-6xl mx-auto px-5 md:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 stagger-children">
+                <div class="fade-up flex flex-col items-center text-center p-8 rounded-2xl bg-white border border-gray-100 hover:shadow-xl transition duration-400">
+                    <div class="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mb-5">
+                        <i data-lucide="hammer" class="w-7 h-7 text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy mb-3">Quality Craftsmanship</h3>
+                    <p class="text-neutral text-base leading-relaxed">Every tile, stroke of paint, and piece of drywall is handled with expert precision — no corners cut, ever.</p>
+                </div>
+                <div class="fade-up flex flex-col items-center text-center p-8 rounded-2xl bg-white border border-gray-100 hover:shadow-xl transition duration-400">
+                    <div class="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mb-5">
+                        <i data-lucide="handshake" class="w-7 h-7 text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy mb-3">Honest &amp; Reliable</h3>
+                    <p class="text-neutral text-base leading-relaxed">Transparent quotes, dependable timelines, and zero surprises. The name says it all.</p>
+                </div>
+                <div class="fade-up flex flex-col items-center text-center p-8 rounded-2xl bg-white border border-gray-100 hover:shadow-xl transition duration-400">
+                    <div class="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center mb-5">
+                        <i data-lucide="palette" class="w-7 h-7 text-accent"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-navy mb-3">Comprehensive Design</h3>
+                    <p class="text-neutral text-base leading-relaxed">From the subfloor to the final coat of paint, we handle the entire renovation process seamlessly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== OUR PROMISE ====== -->
+    <section class="py-20 bg-white">
+        <div class="max-w-5xl mx-auto px-5 md:px-8">
+            <div class="fade-up bg-navy rounded-3xl p-10 md:p-16 text-center shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-accent/20 rounded-tl-3xl"></div>
+                <div class="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-accent/20 rounded-br-3xl"></div>
+                <div class="absolute inset-0 opacity-5" style="background-image: radial-gradient(circle at 20% 50%, rgba(201,169,110,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(201,169,110,0.2) 0%, transparent 50%);"></div>
+
+                <p class="uppercase tracking-[0.25em] text-accent text-xs font-semibold mb-5 relative z-10">Our Promise</p>
+                <h2 class="font-display text-2xl md:text-3xl font-bold text-white mb-6 leading-relaxed relative z-10">
+                    Premium Quality Without<br class="hidden sm:block"> the Premium Price Tag
+                </h2>
+                <p class="text-gray-400 text-base md:text-lg leading-relaxed max-w-3xl mx-auto mb-5 relative z-10">
+                    We believe great renovations shouldn't come at an unreasonable cost. Without the overhead of massive fleets and billboard campaigns, we invest where it truly matters — in quality materials, skilled craftsmen, and results you can see and feel every day.
+                </p>
+                <p class="text-accent font-bold text-lg md:text-xl relative z-10">
+                    The savings go directly to you.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== SERVICES / OUR EXPERTISE ====== -->
+    <section id="services" class="py-20 bg-neutral-soft">
+        <div class="max-w-7xl mx-auto px-5 md:px-8">
+            <div class="text-center mb-16">
+                <p class="uppercase tracking-[0.25em] text-accent text-xs font-semibold mb-3">What We Do Best</p>
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-navy mb-4">Our Expertise</h2>
+                <div class="w-16 h-[3px] bg-accent mx-auto mb-6"></div>
+                <p class="text-base text-neutral max-w-xl mx-auto leading-relaxed">
+                    From full kitchen transformations to bathroom upgrades, tile work, and beyond — we handle it all.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 stagger-children">
+                <!-- Kitchen Remodeling -->
+                <div class="fade-up service-card bg-white rounded-2xl shadow-sm overflow-hidden group border border-gray-100">
+                    <div class="h-60 overflow-hidden img-reveal">
+                        <img src="https://pfst.cf2.poecdn.net/base/image/42a51e4c55454578b3a97fd9c5792f7e134a5880316537943df7a418e0dc56e7?w=765&amp;h=1024" alt="Kitchen Remodeling" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-7">
+                        <h3 class="text-xl font-bold text-navy mb-3">Kitchen Remodeling</h3>
+                        <p class="text-neutral text-base mb-5 leading-relaxed">Complete kitchen transformations — custom cabinets, countertops, modern layouts designed around how you live.</p>
+                        <a href="#contact" class="text-accent-warm font-bold flex items-center text-base hover:text-navy transition group/link">
+                            Discuss Your Project <i data-lucide="arrow-right" class="w-4 h-4 ml-2 transition-transform group-hover/link:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Bathroom Renovations -->
+                <div class="fade-up service-card bg-white rounded-2xl shadow-sm overflow-hidden group border border-gray-100">
+                    <div class="h-60 overflow-hidden img-reveal">
+                        <img src="https://pfst.cf2.poecdn.net/base/image/96ab4762775ced4ace405fc27ad7e7994311913c1020291d51e1fe640293b891?w=1536&amp;h=2048" alt="Bathroom Renovations" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-7">
+                        <h3 class="text-xl font-bold text-navy mb-3">Bathroom Renovations</h3>
+                        <p class="text-neutral text-base mb-5 leading-relaxed">Modern fixtures, custom showers, beautiful vanities — we turn tired bathrooms into personal retreats.</p>
+                        <a href="#contact" class="text-accent-warm font-bold flex items-center text-base hover:text-navy transition group/link">
+                            Discuss Your Project <i data-lucide="arrow-right" class="w-4 h-4 ml-2 transition-transform group-hover/link:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tile Installation -->
+                <div class="fade-up service-card bg-white rounded-2xl shadow-sm overflow-hidden group border border-gray-100">
+                    <div class="h-60 overflow-hidden img-reveal">
+                        <img src="https://pfst.cf2.poecdn.net/base/image/ef0757bb4821f52acc56a2ef250ef547c39f8aacb09524f299d1e56ded89b79d?w=765&amp;h=1024" alt="Tile Installation" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-7">
+                        <h3 class="text-xl font-bold text-navy mb-3">Tile Installation</h3>
+                        <p class="text-neutral text-base mb-5 leading-relaxed">Expert tile laying for floors, elegant backsplashes, and custom shower enclosures with flawless precision.</p>
+                        <a href="#contact" class="text-accent-warm font-bold flex items-center text-base hover:text-navy transition group/link">
+                            Discuss Your Project <i data-lucide="arrow-right" class="w-4 h-4 ml-2 transition-transform group-hover/link:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Painting — NOW WITH IMAGE -->
+                <div class="fade-up service-card bg-white rounded-2xl shadow-sm overflow-hidden group border border-gray-100">
+                    <div class="h-60 overflow-hidden img-reveal">
+                        <img src="https://pfst.cf2.poecdn.net/base/image/0c16bf8d1dfa1648d2d5784303713425cbb9d6f168495c628bf9a8c976e38255?w=2560&amp;h=1707" alt="Painting" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-7">
+                        <h3 class="text-xl font-bold text-navy mb-3">Painting</h3>
+                        <p class="text-neutral text-base mb-5 leading-relaxed">Professional interior and exterior painting — crisp lines, premium finishes, and a transformation you'll love.</p>
+                        <a href="#contact" class="text-accent-warm font-bold flex items-center text-base hover:text-navy transition group/link">
+                            Discuss Your Project <i data-lucide="arrow-right" class="w-4 h-4 ml-2 transition-transform group-hover/link:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Drywall — NOW WITH IMAGE -->
+                <div class="fade-up service-card bg-white rounded-2xl shadow-sm overflow-hidden group border border-gray-100">
+                    <div class="h-60 overflow-hidden img-reveal">
+                        <img src="https://pfst.cf2.poecdn.net/base/image/2a8c2f2e680014c3d44f1977a1f439d9568aec94a03b81652cd6bd9bfc7970d7?w=940&amp;h=627" alt="Drywall Services" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-7">
+                        <h3 class="text-xl font-bold text-navy mb-3">Drywall Services</h3>
+                        <p class="text-neutral text-base mb-5 leading-relaxed">Seamless installation, patching, taping, and texturing — flawless walls that are ready for anything.</p>
+                        <a href="#contact" class="text-accent-warm font-bold flex items-center text-base hover:text-navy transition group/link">
+                            Discuss Your Project <i data-lucide="arrow-right" class="w-4 h-4 ml-2 transition-transform group-hover/link:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Subfloor & Flooring -->
+                <div class="fade-up service-card bg-white rounded-2xl shadow-sm overflow-hidden group border border-gray-100">
+                    <div class="h-60 overflow-hidden img-reveal">
+                        <img src="https://pfst.cf2.poecdn.net/base/image/2999ef4f80623aaef64cdee70ca8e353c1a293e758a80484b4d3506851ab8bad?w=765&amp;h=1024" alt="Flooring" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-7">
+                        <h3 class="text-xl font-bold text-navy mb-3">Subfloor &amp; Flooring</h3>
+                        <p class="text-neutral text-base mb-5 leading-relaxed">Solid subfloor preparation and high-quality flooring installation built to last a lifetime.</p>
+                        <a href="#contact" class="text-accent-warm font-bold flex items-center text-base hover:text-navy transition group/link">
+                            Discuss Your Project <i data-lucide="arrow-right" class="w-4 h-4 ml-2 transition-transform group-hover/link:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== HOW IT WORKS (moved beneath Our Expertise) ====== -->
+    <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-5 md:px-8">
+            <div class="text-center mb-16">
+                <p class="uppercase tracking-[0.25em] text-accent text-xs font-semibold mb-3">Simple &amp; Stress-Free</p>
+                <h2 class="font-display text-3xl md:text-4xl font-bold text-navy mb-4">How It Works</h2>
+                <div class="w-16 h-[3px] bg-accent mx-auto"></div>
+            </div>
+
+            <div class="relative process-line">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 stagger-children relative z-10">
+                    <div class="fade-up flex flex-col items-center text-center">
+                        <div class="w-20 h-20 rounded-full bg-navy text-white flex items-center justify-center text-2xl font-bold mb-6 shadow-lg relative z-10 border-4 border-white">
+                            1
+                        </div>
+                        <span class="text-xs uppercase tracking-widest text-accent font-semibold mb-2">Step 1</span>
+                        <h3 class="text-lg font-bold text-navy mb-2">Free Consultation</h3>
+                        <p class="text-neutral text-base leading-relaxed">Give us a call or send a message — we'd love to hear about your project.</p>
+                    </div>
+                    <div class="fade-up flex flex-col items-center text-center">
+                        <div class="w-20 h-20 rounded-full bg-navy text-white flex items-center justify-center text-2xl font-bold mb-6 shadow-lg relative z-10 border-4 border-white">
+                            2
+                        </div>
+                        <span class="text-xs uppercase tracking-widest text-accent font-semibold mb-2">Step 2</span>
+                        <h3 class="text-lg font-bold text-navy mb-2">Custom Plan &amp; Quote</h3>
+                        <p class="text-neutral text-base leading-relaxed">We visit your home, understand your vision, and create a detailed plan with honest pricing.</p>
+                    </div>
+                    <div class="fade-up flex flex-col items-center text-center">
+                        <div class="w-20 h-20 rounded-full bg-navy text-white flex items-center justify-center text-2xl font-bold mb-6 shadow-lg relative z-10 border-4 border-white">
+                            3
+                        </div>
+                        <span class="text-xs uppercase tracking-widest text-accent font-semibold mb-2">Step 3</span>
+                        <h3 class="text-lg font-bold text-navy mb-2">Expert Renovation</h3>
+                        <p class="text-neutral text-base leading-relaxed">Our dedicated craftsmen bring your vision to life with premium materials and meticulous care.</p>
+                    </div>
+                    <div class="fade-up flex flex-col items-center text-center">
+                        <div class="w-20 h-20 rounded-full bg-navy text-white flex items-center justify-center text-2xl font-bold mb-6 shadow-lg relative z-10 border-4 border-white">
+                            4
+                        </div>
+                        <span class="text-xs uppercase tracking-widest text-accent font-semibold mb-2">Step 4</span>
+                        <h3 class="text-lg font-bold text-navy mb-2">Final Walkthrough</h3>
+                        <p class="text-neutral text-base leading-relaxed">We walk through every detail together — your happiness is how we measure success.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA after process -->
+            <div class="text-center mt-14 fade-up">
+                <a href="tel:+17066317935" class="phone-cta inline-flex items-center text-navy-deep px-10 py-4 rounded-full font-bold text-lg shadow-xl">
+                    <span class="phone-icon mr-2"><i data-lucide="phone" class="w-5 h-5"></i></span> Start Your Project — Call Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== PORTFOLIO / RECENT WORK ====== -->
+    <section id="portfolio" class="py-20 bg-navy text-white">
+        <div class="max-w-7xl mx-auto px-5 md:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-14">
+                <div class="fade-left">
+                    <p class="uppercase tracking-[0.25em] text-accent text-xs font-semibold mb-3">See the Difference</p>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold mb-4">Recent Projects</h2>
+                    <div class="w-16 h-[3px] bg-accent mb-5"></div>
+                    <p class="text-gray-400 max-w-lg text-base leading-relaxed">
+                        Take a look at some of our recent transformations. We take immense pride in every detail of every job we complete.
+                    </p>
+                </div>
+                <a href="https://www.facebook.com/people/Integrity-Renovations-and-Designs/61586637885378/" target="_blank" rel="noreferrer" class="mt-6 md:mt-0 flex items-center text-accent hover:text-white font-semibold transition text-base">
+                    See more on Facebook <i data-lucide="external-link" class="w-4 h-4 ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Photo Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-12 stagger-children">
+                <div class="fade-up portfolio-card group relative h-80 overflow-hidden rounded-2xl bg-navy-light">
+                    <img src="https://pfst.cf2.poecdn.net/base/image/96ab4762775ced4ace405fc27ad7e7994311913c1020291d51e1fe640293b891?w=1536&amp;h=2048" alt="Bathroom remodel" class="w-full h-full object-cover opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-deep/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-6">
+                        <span class="text-white font-bold text-base">Bathroom Remodel</span>
+                    </div>
+                </div>
+                <div class="fade-up portfolio-card group relative h-80 overflow-hidden rounded-2xl bg-navy-light">
+                    <img src="https://pfst.cf2.poecdn.net/base/image/bcd21408576f02c729a5b860d41bc19a364f8e1cc90e7170fe8b33b38038dc0c?w=1536&amp;h=2048" alt="Shower and tile work" class="w-full h-full object-cover opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-deep/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-6">
+                        <span class="text-white font-bold text-base">Shower &amp; Tile Work</span>
+                    </div>
+                </div>
+                <div class="fade-up portfolio-card group relative h-80 overflow-hidden rounded-2xl bg-navy-light">
+                    <img src="https://pfst.cf2.poecdn.net/base/image/ef0757bb4821f52acc56a2ef250ef547c39f8aacb09524f299d1e56ded89b79d?w=765&amp;h=1024" alt="Custom tile design" class="w-full h-full object-cover opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-deep/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-6">
+                        <span class="text-white font-bold text-base">Custom Tile Design</span>
+                    </div>
+                </div>
+                <div class="fade-up portfolio-card group relative h-80 overflow-hidden rounded-2xl bg-navy-light">
+                    <img src="https://pfst.cf2.poecdn.net/base/image/2999ef4f80623aaef64cdee70ca8e353c1a293e758a80484b4d3506851ab8bad?w=765&amp;h=1024" alt="Flooring installation" class="w-full h-full object-cover opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-deep/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-6">
+                        <span class="text-white font-bold text-base">Flooring Installation</span>
+                    </div>
+                </div>
+                <div class="fade-up portfolio-card group relative h-80 overflow-hidden rounded-2xl bg-navy-light">
+                    <img src="https://pfst.cf2.poecdn.net/base/image/e114b4b4373bb8ea2877bcf14802ddb4e243d30f4c4bc74e16436223a0bad192?w=1536&amp;h=2048" alt="Full bathroom renovation" class="w-full h-full object-cover opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-deep/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-6">
+                        <span class="text-white font-bold text-base">Full Bathroom Renovation</span>
+                    </div>
+                </div>
+                <div class="fade-up portfolio-card group relative h-80 overflow-hidden rounded-2xl bg-navy-light">
+                    <img src="https://pfst.cf2.poecdn.net/base/image/42a51e4c55454578b3a97fd9c5792f7e134a5880316537943df7a418e0dc56e7?w=765&amp;h=1024" alt="Kitchen remodel" class="w-full h-full object-cover opacity-90 group-hover:opacity-100">
+                    <div class="absolute inset-0 bg-gradient-to-t from-navy-deep/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 flex items-end p-6">
+                        <span class="text-white font-bold text-base">Kitchen Transformation</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Video -->
+            <div class="mt-12 fade-up">
+                <h3 class="text-xl font-bold mb-6 text-accent">See a Renovation in Action</h3>
+                <div class="max-w-3xl mx-auto rounded-2xl overflow-hidden shadow-2xl border-2 border-white/10">
+                    <video controls="" playsinline="" preload="metadata" class="w-full aspect-video bg-black" poster="https://pfst.cf2.poecdn.net/base/image/96ab4762775ced4ace405fc27ad7e7994311913c1020291d51e1fe640293b891?w=1536&amp;h=2048">
+                        <source src="https://pfst.cf2.poecdn.net/base/video/b334f493d3a8cc34eea4e34241dbd0177424e26a41365e941ab4f854981a5ddf" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== ABOUT SECTION ====== -->
+    <section id="about" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-5 md:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+                <!-- Left: Image collage -->
+                <div class="fade-left grid grid-cols-2 gap-4">
+                    <div class="rounded-2xl overflow-hidden shadow-xl row-span-2 img-reveal">
+                        <img src="https://pfst.cf2.poecdn.net/base/image/bcd21408576f02c729a5b860d41bc19a364f8e1cc90e7170fe8b33b38038dc0c?w=1536&amp;h=2048" alt="Our work" class="w-full h-full object-cover">
+                    </div>
+                    <div class="rounded-2xl overflow-hidden shadow-xl img-reveal">
+                        <img src="https://pfst.cf2.poecdn.net/base/image/e114b4b4373bb8ea2877bcf14802ddb4e243d30f4c4bc74e16436223a0bad192?w=1536&amp;h=2048" alt="Our work" class="w-full h-full object-cover">
+                    </div>
+                    <div class="rounded-2xl overflow-hidden shadow-xl img-reveal">
+                        <img src="https://pfst.cf2.poecdn.net/base/image/ef0757bb4821f52acc56a2ef250ef547c39f8aacb09524f299d1e56ded89b79d?w=765&amp;h=1024" alt="Our work" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <!-- Right: About Text -->
+                <div class="fade-right">
+                    <p class="uppercase tracking-[0.25em] text-accent text-xs font-semibold mb-3">Who We Are</p>
+                    <h2 class="font-display text-3xl md:text-4xl font-bold text-navy mb-4">About Us</h2>
+                    <div class="w-16 h-[3px] bg-accent mb-8"></div>
+
+                    <p class="text-neutral text-base leading-relaxed mb-5">
+                        Integrity Renovations and Designs was founded on a simple principle: <strong class="text-navy">doing the job right</strong>. We take immense pride in providing the Augusta community with remodeling services that are as dependable as they are beautiful.
+                    </p>
+                    <p class="text-neutral text-base leading-relaxed mb-5">
+                        Our craftsmen aren't just workers — they are a dedicated team whose growth is driven by the happiness of the families we serve.
+                    </p>
+                    <p class="text-neutral text-base leading-relaxed mb-10">
+                        We are a company that values <strong class="text-navy">faith, country, and community</strong>, starting every workday with a moment of thanks for our clients and the brave service members who keep us safe.
+                    </p>
+
+                    <div class="flex items-center space-x-8">
+                        <div class="text-center">
+                            <span class="text-3xl font-extrabold text-navy">5-Star</span>
+                            <p class="text-sm text-neutral font-medium mt-1">Rating</p>
+                        </div>
+                        <div class="w-px h-12 bg-gray-200"></div>
+                        <div class="text-center">
+                            <span class="text-3xl font-extrabold text-navy">100%</span>
+                            <p class="text-sm text-neutral font-medium mt-1">Satisfaction</p>
+                        </div>
+                        <div class="w-px h-12 bg-gray-200"></div>
+                        <div class="text-center">
+                            <span class="text-3xl font-extrabold text-navy">Augusta</span>
+                            <p class="text-sm text-neutral font-medium mt-1">Locally Owned</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== CONTACT SECTION ====== -->
+    <section id="contact" class="py-20 bg-neutral-soft">
+        <div class="max-w-5xl mx-auto px-5 md:px-8 text-center">
+            <p class="uppercase tracking-[0.25em] text-accent text-xs font-semibold mb-3">Let's Talk</p>
+            <h2 class="font-display text-3xl md:text-4xl font-bold text-navy mb-4">Ready to Start Your Project?</h2>
+            <div class="w-16 h-[3px] bg-accent mx-auto mb-6"></div>
+            <p class="text-base text-neutral mb-14 max-w-xl mx-auto leading-relaxed">
+                Contact us today — we're ready to discuss your vision and bring it to life.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-7 stagger-children">
+                <!-- Phone -->
+                <a href="tel:+17066317935" class="fade-up flex flex-col items-center p-10 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition duration-400 group">
+                    <div class="bg-accent/10 p-5 rounded-2xl text-accent mb-5 group-hover:bg-accent group-hover:text-white transition duration-300">
+                        <i data-lucide="phone" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="font-bold text-navy mb-2 text-lg">Call Us</h4>
+                    <p class="text-accent-warm font-bold text-lg">(706) 631-7935</p>
+                </a>
+
+                <!-- Email -->
+                <a href="mailto:jasonlucas724@gmail.com" class="fade-up flex flex-col items-center p-10 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition duration-400 group">
+                    <div class="bg-accent/10 p-5 rounded-2xl text-accent mb-5 group-hover:bg-accent group-hover:text-white transition duration-300">
+                        <i data-lucide="mail" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="font-bold text-navy mb-2 text-lg">Email Us</h4>
+                    <p class="text-neutral font-semibold text-base break-all">jasonlucas724@gmail.com</p>
+                </a>
+
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/people/Integrity-Renovations-and-Designs/61586637885378/" target="_blank" rel="noreferrer" class="fade-up flex flex-col items-center p-10 bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition duration-400 group">
+                    <div class="bg-accent/10 p-5 rounded-2xl text-accent mb-5 group-hover:bg-accent group-hover:text-white transition duration-300">
+                        <i data-lucide="facebook" class="w-8 h-8"></i>
+                    </div>
+                    <h4 class="font-bold text-navy mb-2 text-lg">Facebook</h4>
+                    <p class="text-neutral font-semibold text-base">Message Our Page</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== FOOTER ====== -->
+    <footer class="bg-navy-deep text-gray-400 py-14 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-5 md:px-8 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <!-- Brand -->
+            <div>
+                <div class="flex items-center mb-5">
+                    <img src="https://pfst.cf2.poecdn.net/base/image/01b762244f3a978a7c03cc4e0fbef571d09b4bab5119bd53ad70d95fcbc3b9a4?w=1320&amp;h=1298" alt="Integrity Renovations Logo" class="w-11 h-11 mr-3 rounded-lg">
+                    <div>
+                        <h2 class="text-xl font-extrabold leading-none uppercase tracking-tight text-white">Integrity</h2>
+                        <p class="text-[11px] font-semibold tracking-widest text-gray-500 uppercase">Renovations &amp; Designs</p>
+                    </div>
+                </div>
+                <p class="text-base leading-relaxed max-w-xs">
+                    Your trusted partner for honest, premium home transformations in the Augusta area.
+                </p>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 class="text-white font-bold mb-5 text-base">Quick Links</h4>
+                <ul class="space-y-3 text-base">
+                    <li><a href="#home" class="hover:text-white transition">Home</a></li>
+                    <li><a href="#services" class="hover:text-white transition">Our Services</a></li>
+                    <li><a href="#portfolio" class="hover:text-white transition">Portfolio</a></li>
+                    <li><a href="#about" class="hover:text-white transition">About Us</a></li>
+                    <li><a href="#contact" class="hover:text-white transition">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Connect -->
+            <div>
+                <h4 class="text-white font-bold mb-5 text-base">Connect With Us</h4>
+                <a href="https://www.facebook.com/people/Integrity-Renovations-and-Designs/61586637885378/" target="_blank" rel="noreferrer" class="flex items-center hover:text-white transition mb-4 text-base">
+                    <i data-lucide="facebook" class="w-5 h-5 mr-3 text-blue-400"></i> Facebook Page
+                </a>
+                <a href="tel:+17066317935" class="flex items-center hover:text-white transition mb-4 text-base">
+                    <i data-lucide="phone" class="w-5 h-5 mr-3 text-accent"></i> (706) 631-7935
+                </a>
+                <a href="mailto:jasonlucas724@gmail.com" class="flex items-center hover:text-white transition text-base">
+                    <i data-lucide="mail" class="w-5 h-5 mr-3 text-accent"></i> jasonlucas724@gmail.com
+                </a>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-5 md:px-8 mt-12 pt-8 border-t border-white/5 text-sm text-center text-gray-500">
+            <p>© <span id="current-year"></span> Integrity Renovations and Designs. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- ====== MOBILE STICKY PHONE BAR ====== -->
+    <div class="mobile-phone-bar fixed bottom-0 left-0 right-0 z-50 md:hidden py-3 px-5 flex items-center justify-center" id="mobile-sticky-bar" style="display:none;">
+        <a href="tel:+17066317935" class="flex items-center justify-center w-full text-navy-deep font-bold text-lg">
+            <span class="phone-icon mr-2"><i data-lucide="phone" class="w-5 h-5"></i></span>
+            Call Now — (706) 631-7935
+        </a>
+    </div>
+
+    <!-- ====== SCRIPTS ====== -->
+    <script>
+        // Dark mode detection
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.documentElement.classList.add('dark');
+        }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(event) {
+            if (event.matches) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        });
+
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Current year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Mobile Menu
+        var menuBtn = document.getElementById('mobile-menu-btn');
+        var mobileMenu = document.getElementById('mobile-menu');
+        var menuIcon = document.getElementById('menu-icon');
+        var closeIcon = document.getElementById('close-icon');
+        var mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+
+        mobileLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                if (!mobileMenu.classList.contains('hidden')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // Scroll-triggered animations (fade-up, fade-left, fade-right)
+        var animatedElements = document.querySelectorAll('.fade-up, .fade-left, .fade-right');
+        var animObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        animatedElements.forEach(function(el) {
+            animObserver.observe(el);
+        });
+
+        // Nav scroll effect
+        var mainNav = document.getElementById('main-nav');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 60) {
+                mainNav.classList.add('scrolled');
+            } else {
+                mainNav.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile sticky phone bar — show after scrolling past hero
+        var stickyBar = document.getElementById('mobile-sticky-bar');
+        var heroSection = document.getElementById('home');
+
+        function checkStickyBar() {
+            if (!heroSection || !stickyBar) return;
+            var heroBottom = heroSection.getBoundingClientRect().bottom;
+            if (heroBottom < 0) {
+                stickyBar.style.display = 'flex';
+            } else {
+                stickyBar.style.display = 'none';
+            }
+        }
+
+        window.addEventListener('scroll', checkStickyBar);
+        checkStickyBar();
+
+        // Re-init lucide after DOM is ready (for dynamically rendered icons in sticky bar)
+        setTimeout(function() {
+            lucide.createIcons();
+        }, 100);
+    </script>
+
+
+
+
+</body></html>
